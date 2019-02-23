@@ -1,0 +1,40 @@
+@font-face {
+    font-weight: normal;
+    font-family: "Fira Sans Medium";
+    font-style: normal;
+    font-display: swap;
+    src: url("../fonts/Firasansmedium.woff2") format("woff2"), url("../fonts/Firasansmedium.woff") format("woff");
+}
+  
+@font-face {
+    font-weight: bold;
+    font-family: "Open Sans Bold";
+    font-style: normal;
+    font-display: swap;
+    src: url("../fonts/Firasansbold.woff2") format("woff2"), url("../fonts/Firasansbold.woff") format("woff");
+}
+
+@font-face {
+    font-weight: normal;
+    font-family: "Open Sans Regular";
+    font-style: normal;
+    font-display: swap;
+    src: url("../fonts/Firasansregular.woff2") format("woff2"), url("../fonts/Firasansregular.woff") format("woff");
+}
+
+@font-face {
+    font-weight: normal;
+    font-family: "Open Sans SemiBold";
+    font-style: normal;
+    font-display: swap;
+    src: url("../fonts/Firasanssemibold.woff2") format("woff2"), url("../fonts/Firasanssemibold.woff") format("woff");
+}
+
+body {
+    font-family: "Fira Sans Medium", sans-serif;
+    margin: 0;
+    padding: 0;
+  
+    color: black;
+    font-weight: normal;
+}
