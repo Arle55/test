@@ -1,6 +1,7 @@
 "use strict";
 
 var gulp = require("gulp");
+var babel = require('gulp-babel');
 var plumber = require("gulp-plumber");
 var sass = require("gulp-sass");
 var pug = require("gulp-pug");
@@ -29,6 +30,16 @@ gulp.task("pug", function(){
   .pipe(server.reload({
     stream: true
   }))
+});
+
+gulp.task('scripts', function() {
+  return gulp.src(
+    [
+    'node_modules/babel-polyfill/dist/polyfill.js',
+    'js/*.js'
+    ])
+    .pipe(babel({presets: ['es2015']}))
+    .pipe(gulp.dest('compiled'))
 });
 
 gulp.task("server", function () {
