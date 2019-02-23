@@ -60,10 +60,12 @@
         }
 
         &-del {
-            width: 50px;
             margin-right: 20px;
             font-size: 18px;
             color: #5d5dba;
+            background-color: transparent;
+            border: none;
+            outline: none;
         }
     }
 }

@@ -49,14 +49,17 @@ gulp.task("copy", function(){
   .pipe(gulp.dest("build"));
 })
 
-gulp.task('scripts', function() {
+gulp.task("clean", function () {
+  return del("build");
+});
+
+gulp.task("scripts", function() {
   return gulp.src(
     [
-    'node_modules/babel-polyfill/dist/polyfill.js',
-    'js/*.js'
+    "node_modules/babel-polyfill/dist/polyfill.js",
+    "source/js/*.js"
     ])
-    .pipe(babel({presets: ['es2015']}))
-    .pipe(gulp.dest('compiled'))
+    .pipe(gulp.dest("build"))
 });
 
 gulp.task("server", function () {
@@ -72,5 +75,5 @@ gulp.task("server", function () {
   gulp.watch("source/*.pug", gulp.series("pug"));
 });
 
-gulp.task("build", gulp.series("clean", "copy", "css","pug"));
+gulp.task("build", gulp.series("clean", "copy", "css","pug", "scripts"));
 gulp.task("start", gulp.series("build", "server"));
