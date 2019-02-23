@@ -1,8 +1,10 @@
 "use strict";
 
 var gulp = require("gulp");
+var del = require("del");
 var babel = require('gulp-babel');
 var plumber = require("gulp-plumber");
+var rename = require("gulp-rename");
 var sass = require("gulp-sass");
 var pug = require("gulp-pug");
 var htmlmin = require("gulp-htmlmin");
@@ -18,7 +20,10 @@ gulp.task("css", function () {
     .pipe(postcss([
       autoprefixer()
     ]))
-    .pipe(gulp.dest("source/css"))
+    .pipe(gulp.dest("build/css"))
+    .pipe(csso())
+    .pipe(rename("style.min.css"))
+    .pipe(gulp.dest("build/css"))
     .pipe(server.stream());
 });
 
@@ -27,10 +32,22 @@ gulp.task("pug", function(){
   .pipe(pug({ pretty: true }))
   .pipe(gulp.dest("source"))
   .pipe(htmlmin({ collapseWhitespace: true }))
+  .pipe(gulp.dest("build"))
   .pipe(server.reload({
-    stream: true
+    stream: true							
   }))
 });
+
+gulp.task("copy", function(){
+  return gulp.src([
+    "source/fonts/*.{woff, woff2}",
+    "source/img/**",
+    "source/js/**"
+  ], {
+    base: "source"
+  })
+  .pipe(gulp.dest("build"));
+})
 
 gulp.task('scripts', function() {
   return gulp.src(
@@ -44,7 +61,7 @@ gulp.task('scripts', function() {
 
 gulp.task("server", function () {
   server.init({
-    server: "source/",
+    server: "build/",
     notify: false,
     open: true,
     cors: true,
@@ -54,4 +71,6 @@ gulp.task("server", function () {
   gulp.watch("source/sass/**/*.{scss,sass}", gulp.series("css"));
   gulp.watch("source/*.pug", gulp.series("pug"));
 });
-gulp.task("start", gulp.series("pug", "css", "server"));
+
+gulp.task("build", gulp.series("clean", "copy", "css","pug"));
+gulp.task("start", gulp.series("build", "server"));
