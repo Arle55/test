@@ -27,7 +27,7 @@ gulp.task("pug", function(){
   .pipe(gulp.dest("source"))
   .pipe(htmlmin({ collapseWhitespace: true }))
   .pipe(server.reload({
-    stream: true							
+    stream: true
   }))
 });
 
@@ -43,5 +43,4 @@ gulp.task("server", function () {
   gulp.watch("source/sass/**/*.{scss,sass}", gulp.series("css"));
   gulp.watch("source/*.pug", gulp.series("pug"));
 });
-
 gulp.task("start", gulp.series("pug", "css", "server"));
