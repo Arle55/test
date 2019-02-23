@@ -2,7 +2,6 @@
 
 var gulp = require("gulp");
 var del = require("del");
-var babel = require('gulp-babel');
 var plumber = require("gulp-plumber");
 var rename = require("gulp-rename");
 var sass = require("gulp-sass");
@@ -40,7 +39,7 @@ gulp.task("pug", function(){
 
 gulp.task("copy", function(){
   return gulp.src([
-    "source/fonts/*.{woff, woff2}",
+    "source/fonts/*.{woff,woff2}",
     "source/img/**",
     "source/js/**"
   ], {
@@ -73,6 +72,7 @@ gulp.task("server", function () {
 
   gulp.watch("source/sass/**/*.{scss,sass}", gulp.series("css"));
   gulp.watch("source/*.pug", gulp.series("pug"));
+  gulp.watch("source/*js", gulp.series("scripts"));
 });
 
 gulp.task("build", gulp.series("clean", "copy", "css","pug", "scripts"));
